@@ -24,7 +24,7 @@ cat << EOF > "${BUCKET_POLICY_FILE}"
 
 EOF
 
-"aws s3api put-bucket-policy --bucket ${BUCKET_NAME} --policy file://${BUCKET_POLICY_FILE} --profile j1-sandboxdeveloper"
+aws s3api put-bucket-policy --bucket ${BUCKET_NAME} --policy file://${BUCKET_POLICY_FILE} --profile j1-sandboxdeveloper
 
 
 rm -f "${BUCKET_POLICY_FILE}"
