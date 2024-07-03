@@ -1,0 +1,29 @@
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: mytestingbucketboostjuice123
+
+
+  myDistribution:
+    Type: AWS::CloudFront::Distribution
+    DependsOn: MyBucket
+    Properties:
+      DistributionConfig:
+        Origins:
+        - DomainName: mytestingbucketboostjuice123.s3.ap-southeast-2.amazonaws.com
+          Id: SomeOriginIdHere
+          S3OriginConfig:
+            OriginAccessIdentity: origin-access-identity/cloudfront/E12CISYHZ9Z0SG
+        Enabled: 'true'
+        Comment: Some comment
+        DefaultCacheBehavior:
+          AllowedMethods:
+          - GET
+          - HEAD
+          TargetOriginId: SomeOriginIdHere
+          ForwardedValues:
+            QueryString: 'false'
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https 

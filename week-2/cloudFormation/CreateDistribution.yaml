@@ -1,0 +1,24 @@
+Resources:
+  MainBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: mytestingbucketboostjuice123
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          TargetOriginId: MyBucket
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - GET
+            - HEAD
+          CachePolicyId: dd61202c-3303-491d-8a69-ab502c3c6d27
+        Origins:
+          Id: MyBucket
+          DomainName: aws-workshop-72b700f8-0e19-4e81-943d-81c07e4f93f4.s3.ap-southeast-2.amazonaws.com
+          CustomHeaders:
+            Quantity: 0
+        Comment: CloudFront Distribution From CloudFormation
+        Enabled: True
