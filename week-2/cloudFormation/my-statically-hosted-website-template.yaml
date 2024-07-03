@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: >
+  Creates a statically hosted website.
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: my-static-website-for-aws-workshop-week-2
+  TagValue:
+    Type: String
+    MinLength: 0
+    MaxLength: 256
+    AllowedPattern: ^(?!aws:)[a-zA-Z0-9\s_.:/=+\-@]{0, 256}
+
+Resources:
+  MyStaticallyHostedWebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      Tags:
+        - Key: CustomTag
+          Value: !Ref TagValue
+
+Outputs:
+  MyBucketsDomainName:
+    Description: Domain Name Attribute
+    Value: !GetAtt MyStaticallyHostedWebsiteBucket.DomainName
